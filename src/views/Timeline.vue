@@ -1,22 +1,53 @@
 <template>
   <nav class="is-primary panel">
     <p class="panel-tabs">
-      <a href="#" v-for="period in periods" :key="period" data-test="period">{{period}}</a>
+      <a
+        v-for="period in periods"
+        :key="period"
+        data-test="period"
+        :class="{'is-active': period === selectedPeriod}"
+        @click="setPeriod(period)"
+      >{{period}}</a>
+
     </p>
+    <TimelinePost v-for="post in posts" :key="post.id" :post="post" />
   </nav>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-import {Period} from '../types'
+import { defineComponent, ref, computed } from 'vue'
+import { Period, Post } from '@/types'
+import { todayPost, thisWeek, thisMonth } from './mocks'
+import moment from 'moment'
+import TimelinePost from './TimelinePost.vue'
+
 export default defineComponent({
-  setup() {
+  components: { TimelinePost },
+  setup () {
     const periods: Period[] = ['today', 'this week', 'this month']
-    return {periods}
+    const selectedPeriod = ref<Period>('today')
+
+    const posts: Post[] = computed(() => [todayPost, thisWeek, thisMonth].filter(post => {
+      if (selectedPeriod.value === 'today' &&
+        post.created.isAfter(moment().subtract(1, 'day'))) { return true }
+
+      if (selectedPeriod.value === 'this week' &&
+        post.created.isAfter(moment().subtract(7, 'day'))) { return true }
+
+      if (selectedPeriod.value === 'this month' &&
+        post.created.isAfter(moment().subtract(1, 'month'))) { return true }
+
+      return false
+    }))
+
+    const setPeriod = (period: Period) => {
+      selectedPeriod.value = period
+    }
+
+    return { periods, selectedPeriod, setPeriod, posts }
   }
 })
 </script>
 
 <style>
-
 </style>
