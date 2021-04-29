@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home.vue'
 
 export const router = createRouter({
@@ -8,6 +8,11 @@ export const router = createRouter({
       name: 'Home',
       path: '/',
       component: Home
+    },
+    {
+      name: 'NewPost',
+      path: '/posts/new',
+      component: () => import('./views/NewPost.vue')
     }
   ]
 })

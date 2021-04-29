@@ -15,6 +15,8 @@ module.exports = {
     '@vue/typescript/recommended'
   ],
   rules: {
-    'promise/param-names': 'off'
+    'promise/param-names': 'off',
+    // https://github.com/eslint/eslint/issues/13957
+    indent: 'off'
   }
 }

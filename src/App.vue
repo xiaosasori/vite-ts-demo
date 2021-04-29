@@ -1,6 +1,7 @@
 <template>
   <div class="section">
     <div class="container">
+      <Navbar />
       <router-view />
     </div>
   </div>
@@ -8,9 +9,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Navbar from './views/Navbar.vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
+  components: { Navbar }
 })
 </script>
 

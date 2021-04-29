@@ -3,6 +3,7 @@ import axios from 'axios'
 import {router} from './router'
 import App from './App.vue'
 import * as mockData from './views/mocks'
+import 'highlight.js/styles/solarized-dark.css'
 
 const delay = (ms: number) => new Promise(resovle => setTimeout(resovle, ms))
 
