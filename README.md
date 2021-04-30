@@ -7,6 +7,7 @@ This template should help get you started developing with Vue 3 and Typescript i
 - test with typescript
 - form validators helper
 - https://next.vue-test-utils.vuejs.org
+- `vue` implicitly make object returned in setup reactive
 
 ## Recommended IDE Setup
 
